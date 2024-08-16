@@ -1,24 +1,48 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type     | Options     |
+| ------------------ | -------- | ----------- |
+| email              | string   | null: false |
+| encrypted_password | string   | null: false |
+| name               | string   | null: false |
+| profile            | text     | null: false |
+| occupation         | text     | null: false |
+| position           | text     | null: false |
+| created_at         | datetime | null: false |
+| updated_at         | datetime | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :prototypes, dependent: :destroy
+- has_many :comments, dependent: :destroy
 
-* Configuration
+## prototypes テーブル
+| Column             | Type     | Options     |
+| ------------------ | -------- | ----------- |
+| title              | string   | null: false |
+| catch_copy         | text     | null: false |
+| concept            | text     | null: false |
+| user_id            | bigint   | null: false |
+| created_at         | datetime | null: false |
+| updated_at         | datetime | null: false |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :user
+- has_many :comments, dependent: :destroy
 
-* How to run the test suite
+## comments テーブル
+| Column             | Type     | Options     |
+| ------------------ | -------- | ----------- |
+| content            | text     | null: false |
+| prototype_id       | bigint   | null: false |
+| user_id            | bigint   | null: false |
+| created_at         | datetime | null: false |
+| updated_at         | datetime | null: false |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
-
-* ...
+- belongs_to :user
+- belongs_to :prototype
