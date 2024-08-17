@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_action :set_current_user
   
     private
 
@@ -10,8 +9,5 @@ class ApplicationController < ActionController::Base
       devise_paramater_sanitizer.permit(:account_update, keys: [:name, :profile, :occupation, :position])
     end
 
-    def set_current_user
-      @current_user = current_user
-    end
   end
 end
