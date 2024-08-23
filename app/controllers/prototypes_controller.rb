@@ -8,8 +8,12 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    Prototype.create(prototype_params)
-    redirect_to'/'
+    @prototype = current_user.prototypes.build(prototype_params)
+    if @prototype.save
+      redirect_to root_path, notice: 'プロトタイプが作成されました。'
+    else
+      render :new
+    end
   end
 
   def show
@@ -18,7 +22,7 @@ class PrototypesController < ApplicationController
 
   private
   def prototype_params
-    params.require(:prototype).permit(:name, :image, :text).merge(user_id: current_user.id)
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
 
 end
