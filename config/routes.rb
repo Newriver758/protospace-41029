@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  
+
   root to: "prototypes#index"
 end
