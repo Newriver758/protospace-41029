@@ -26,7 +26,6 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-  
   end
 
   def update
@@ -50,10 +49,11 @@ class PrototypesController < ApplicationController
 
   def set_prototype
     @prototype = Prototype.find(params[:id])
+    Rails.logger.debug "Prototype: #{@prototype.inspect}"
   end
 
   def authorize_user!
-    unless @prototype.user == current_user
+    if @prototype.nil? || @prototype.user != current_user
       redirect_to root_path, alert: 'アクセス権限がありません'
     end
   end

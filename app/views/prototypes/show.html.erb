@@ -14,10 +14,8 @@
       <% end %>
 
       <div class="prototype__image">
-        <% if @prototype.image.attached? %>
+        <% if @prototype.image.present? %>
           <%= image_tag @prototype.image %>
-        <% else %>
-          <%= image_tag asset_path('default_image.png'), alt: 'デフォルト画像' %>
         <% end %>
       </div>
 
