@@ -1,0 +1,7 @@
+<%= form_with(model: [ @prototype, @comment ], local: true) do |f| %>
+  <div class="field">
+    <%= f.label :content, "コメント" %><br />
+    <%= f.text_area :content, id:"comment_content" %>
+  </div>
+  <%= f.submit "コメントを投稿" %>
+<% end %>

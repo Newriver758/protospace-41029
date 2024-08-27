@@ -1,5 +1,8 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  
   def index
     @prototypes = Prototype.all
   end
@@ -36,6 +39,7 @@ class PrototypesController < ApplicationController
 
   def show
     @comment = Comment.new
+    @comments = @prototype.comments.includes(:user)
   end
 
   private
@@ -46,5 +50,11 @@ class PrototypesController < ApplicationController
 
   def set_prototype
     @prototype = Prototype.find(params[:id])
+  end
+
+  def authorize_user!
+    unless @prototype.user == current_user
+      redirect_to root_path, alert: 'アクセス権限がありません'
+    end
   end
 end
