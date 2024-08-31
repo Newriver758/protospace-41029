@@ -6,7 +6,7 @@
       </p>
 
       <% if @prototype.user.present? %>
-      <%= link_to "by #{@prototype.user.name}", user_path(@prototype.user), class: :prototype__user %>
+        <%= link_to "by #{@prototype.user.name}", user_path(@prototype.user), class: :prototype__user %>
       <% else %>
         <p class="prototype__user">ユーザー情報がありません</p>
       <% end %>
@@ -14,7 +14,7 @@
       <% if @prototype.user == current_user %>
         <div class="prototype__manage">
           <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
-          <%= link_to "削除する", prototype_path(@prototype), method: :delete, data: { confirm: '本当に削除しますか？' }, class: :prototype__btn %>
+          <%= link_to "削除する", prototype_path(@prototype), data: { turbo_method: :delete }, class: :prototype__btn %>
         </div>
       <% end %>
 
