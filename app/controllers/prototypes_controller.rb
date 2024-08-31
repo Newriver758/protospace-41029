@@ -21,8 +21,11 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    @prototype.destroy
-    redirect_to root_path, notice: 'プロトタイプが削除されました'
+    if @prototype.destroy
+      redirect_to root_path, notice: 'プロトタイプが削除されました'
+    else
+      redirect_to prototype_path(@prototype), alert: 'プロトタイプの削除に失敗しました'
+    end
   end
 
   def edit
