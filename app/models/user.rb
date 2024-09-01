@@ -4,5 +4,5 @@ class User < ApplicationRecord
   has_many :prototypes
   has_many :commnets
 
-  validates :name, presence: true
+  validates :name, :profile, :occupation, :position, presence: true
 end
